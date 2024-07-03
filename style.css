@@ -1,7 +1,9 @@
 body {
     font-family: sans-serif;
     padding: 25px;
+    background-color: ##383838; /* Измените этот цвет на желаемый */
 }
+
 input, button {
     display: block;
     width: 100%;
@@ -9,9 +11,11 @@ input, button {
     padding: 10px;
     font-size: 24px;
 }
+
 button {
     width: auto;
 }
+
 .result {
     font-size: 40px;
     margin-top: 25px;
