@@ -3,89 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nearest Grams Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 25px;
-        }
-        input, button {
-            display: block;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        #result {
-            font-size: 40px;
-            margin-top: 25px;
-        }
-    </style>
+    <title>Price Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <input id="pricePerKg" type="number" placeholder="Ціна за кілограм" step="0.01">
-    <input id="totalAmount" type="number" placeholder="Необхідна сумма" step="0.01">
-    <input id="desiredKopeck" type="number" placeholder="Необхідна копійка" step="1">
+    <input type="number" id="pricePerKg" placeholder="Ціна за кілограм" step="0.01">
+    <input type="number" id="totalAmount" placeholder="Необхідна сумма" step="0.01">
+    <input type="number" id="desiredKopeck" placeholder="Необхідна копійка">
     <button onclick="calculateNearestGrams()">Розрахувати</button>
-    <div id="result"></div>
-
+    <div class="result" id="resultGrams">Грам необхідно: </div>
+    <div class="result" id="resultSum">Сума: </div>
+    <script src="script.js"></script>
     <script>
-        function calculateNearestGrams() {
-            const pricePerKgStr = document.getElementById('pricePerKg').value;
-            const totalAmountStr = document.getElementById('totalAmount').value;
-            let desiredKopeckStr = document.getElementById('desiredKopeck').value;
-
-            try {
-                const pricePerKg = parseFloat(pricePerKgStr);
-                const totalAmount = parseFloat(totalAmountStr);
-
-                if (isNaN(pricePerKg) || isNaN(totalAmount)) {
-                    throw new Error("Невірні вхідні дані, перевірте значення.");
-                }
-
-                let useWholeNumbers = false;
-                if (!desiredKopeckStr && totalAmount % 1 === 0) {
-                    useWholeNumbers = true;
-                    desiredKopeckStr = '0';
-                } else if (!desiredKopeckStr) {
-                    desiredKopeckStr = '0';
-                }
-
-                const desiredKopeck = parseInt(desiredKopeckStr);
-                const pricePerGram = pricePerKg / 1000;
-                const maxGrams = Math.floor(totalAmount / pricePerGram);
-
-                let nearestGrams = null;
-                let nearestSum = null;
-
-                for (let grams = maxGrams; grams >= 0; grams--) {
-                    const currentSum = pricePerGram * grams;
-                    const currentKopeck = Math.round((currentSum % 1) * 100);
-
-                    if (useWholeNumbers) {
-                        if (currentKopeck === 0) {
-                            nearestGrams = grams;
-                            nearestSum = currentSum;
-                            break;
-                        }
-                    } else {
-                        if (currentKopeck === desiredKopeck) {
-                            nearestGrams = grams;
-                            nearestSum = currentSum;
-                            break;
-                        }
-                    }
-                }
-
-                const resultDiv = document.getElementById('result');
-                if (nearestGrams !== null && nearestSum !== null) {
-                    resultDiv.innerHTML = `Грам: ${nearestGrams}<br>Сума: ${nearestSum.toFixed(2)}`;
-                } else {
-                    resultDiv.innerHTML = "Не знайдено підходящого значення.";
-                }
-            } catch (e) {
-                document.getElementById('result').innerHTML = e.message;
-            }
-        }
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+        .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch((error) => {
+            console.log('Service Worker registration failed:', error);
+        });
+    }
     </script>
 </body>
 </html>
