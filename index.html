@@ -42,10 +42,11 @@
                     throw new Error("Невірні вхідні дані, перевірте значення.");
                 }
 
-                // Если копейка не введена или равна 00, используем ближайшее целое число
                 let useWholeNumbers = false;
-                if (!desiredKopeckStr || desiredKopeckStr === '00') {
+                if (!desiredKopeckStr && totalAmount % 1 === 0) {
                     useWholeNumbers = true;
+                    desiredKopeckStr = '0';
+                } else if (!desiredKopeckStr) {
                     desiredKopeckStr = '0';
                 }
 
@@ -61,7 +62,7 @@
                     const currentKopeck = Math.round((currentSum % 1) * 100);
 
                     if (useWholeNumbers) {
-                        if (currentKopeck % 10 === 0) {
+                        if (currentKopeck === 0) {
                             nearestGrams = grams;
                             nearestSum = currentSum;
                             break;
