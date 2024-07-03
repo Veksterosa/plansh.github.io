@@ -12,6 +12,7 @@ input, button {
 }
 button {
     width: auto;
+    background-color: #dbdbdb;
 }
 .result {
     font-size: 40px;
