@@ -1,6 +1,11 @@
 body {
     font-family: sans-serif;
     padding: 25px;
+    color: white;
+    background-image: url('scale_1200.jpeg'); /* Укажите путь к вашему изображению */
+    background-size: cover; /* Изображение будет покрывать весь фон */
+    background-position: top;
+    background-repeat: no-repeat;
 }
 input, button {
     display: block;
@@ -15,4 +20,8 @@ button {
 .result {
     font-size: 40px;
     margin-top: 25px;
+    color: white; /* Цвет текста результата */
+    background-color: rgba(0, 0, 0, 0.4); /* Полупрозрачный черный фон для текста результата */
+    padding: 10px; /* Внутренние отступы */
+    border-radius: 5px; /* Скругленные углы */
 }
