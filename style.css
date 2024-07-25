@@ -1,6 +1,7 @@
 body {
     font-family: sans-serif;
     padding: 25px;
+    background-color: #3d3d3d;
     background-image: url('FUo1SVEaAAA8HHN.jpg_large.jpg'); /* Укажите путь к вашему изображению */
     background-size: cover; /* Изображение будет покрывать весь фон */
     background-position: top; /* Изображение будет центрировано */
